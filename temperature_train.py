@@ -65,7 +65,7 @@ plt.ion()  # 打开交互模式
 fig, ax = plt.subplots()
 loss_values = []
 epoch_values = []
-plot_interval = 10  # 每10个epoch更新一次图表
+plot_interval = 1  # 每10个epoch更新一次图表
 
 # ===================== 训练 =====================
 epochs = 2000
@@ -108,6 +108,21 @@ for epoch in range(1, epochs + 1):
 # 训练结束后关闭实时交互
 plt.ioff()
 plt.show()
+
+# ===================== 保存损失函数图像 =====================
+# 确保在训练完成后保存完整的损失函数曲线
+plt.figure(figsize=(8, 6))
+plt.plot(epoch_values, loss_values, label='Training Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.title('Training Loss over Epochs')
+plt.legend()
+plt.grid(True)
+
+# 保存图像
+plt.savefig('loss_plot.png')
+print("Training loss plot saved as 'loss_plot.png'")
+
 
 # ===================== 测试 =====================
 net.eval()  # 设置为评估模式
